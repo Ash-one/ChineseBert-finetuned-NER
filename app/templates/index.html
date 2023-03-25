@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+
+<head> 
+    <meta charset="utf-8"> 
+    <link href="static/js/mystyle.css" type="text/css" rel="stylesheet">
+    <title>NER测试页面首页</title> 
+</head>
+
+<script>
+    function submitForm() {
+        var text = document.getElementById("my-text").value;
+        var model = document.querySelector('input[name="model"]:checked').value;
+        var waiting = document.getElementById("waiting-text");
+        waiting.innerHTML = '正在预测...';
+        var displacy = document.getElementById("visual");
+        var url = "/predict?text=" + text + "&model=" + model;
+        const response = fetch(url, {
+            method: 'GET',
+        }).then(function (response) {
+            return response.text();
+        })
+        .then(function (data) {
+                console.log(data);
+                waiting.innerHTML = '';
+                displacy.innerHTML = data;
+                console.log("ok!!!");
+            });
+    }
+</script>
+
+<body background="static/bg.jpg" 
+        style="background-repeat:no-repeat;
+         background-attachment:fixed; 
+         background-size: 100%;
+         ">
+    <div id="container">
+        <div id="header">
+            <h2>命名实体识别任务</h2>
+        </div>
+        <div id="input">
+            <h3>输入待预测文本：</h3>
+            <textarea type="text" id="my-text" name="text" rows="3" cols="20">我就要在中国传媒大学吃上崔永元真面</textarea><br>
+            <h3>选择一个模型：</h3>
+            <input type="radio" name="model" value="rbt3-mlp-ner" checked="true">rbt3-mlp-ner<br>
+            <input type="radio" name="model" value="rbt3-bilstm-crf-ner">rbt3-bilstm-crf-ner<br>
+            <input type="submit" id="my-button" value="提交开始预测" onclick="submitForm()">
+        </div>
+
+        <div id="output"> 
+            <h3>预测结果</h3>
+            <p id="waiting-text"> </p>
+            <div id="visual">
+                <div class="entities" style="line-height: 2.5; direction: ltr">我就要在
+                    <mark class="entity" style="background: linear-gradient(90deg, #BE5869, #7b4397); padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+                        中国
+                        <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">GPE.NAM</span>
+                    </mark>
+                    
+                    <mark class="entity" style="background: linear-gradient(90deg, #aa9cfc, #fc9ce7); padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+                        传媒大学
+                        <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">ORG.NAM</span>
+                    </mark>
+                    吃上
+                    <mark class="entity" style="background: linear-gradient(90deg, #c2e59c, #64b3f4); padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+                        崔永元真
+                        <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; vertical-align: middle; margin-left: 0.5rem">PER.NAM</span>
+                    </mark>
+                    面</div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
