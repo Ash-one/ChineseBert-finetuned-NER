@@ -14,5 +14,8 @@ jupyter notebook中是模型的训练过程和一些工具函数，都可以运�
 
 - 2 [使用Bert进行NER命名实体识别feat.fastNLP(下：使用flask部署模型)](https://ash-one.github.io/2023/03/25/shi-yong-bert-jin-xing-ner-ming-ming-shi-ti-shi-bie-feat-fastnlp-xia-shi-yong-flask-bu-shu-mo-xing/)
 
+## 准备
+下载好模型后需要将模型放入`app/static/models/`路径下，和txt文件同一文件夹中。
+
 ## 运行
 服务器上运行flask服务端，需要运行`run.py`文件。
