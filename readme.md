@@ -1,6 +1,6 @@
 ## 概述
 
-本项目为基于fastNLP/pytorch实现Bert+BiLSTM+CRF的命名实体识别任务，并用flask实现服务端可视化展示。
+本项目为基于fastNLP/pytorch实现Bert+BiLSTM+CRF的命名实体识别任务，使用数据集为weiboNER数据集，并用flask实现服务端可视化展示。
 
 ![结果展示](https://s2.loli.net/2023/03/25/e53mHihFl8JENqV.png)
 
